@@ -134,7 +134,13 @@ export default class SearchRecipes extends Component {
                 <label>
                   <strong>Ingredients:</strong>
                 </label>{" "}
-                {currentRecipe.ingredients}
+                <ul className="list-group-flush">
+                  {currentRecipe.ingredients.map((ingredient, index) => (
+                    <li className="list-group-item" 
+                      key={index}>{ingredient.name}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           ) : (
