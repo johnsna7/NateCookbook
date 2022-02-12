@@ -9,22 +9,22 @@ class CookbookDataService {
     clearDatabase() {
         return http.delete("/clearDatabase");
     }
-
-    createRecipe() {
+    createRecipe(data) {
         return http.post("/createRecipe", data);
     }
 
-    addIngredient() {
+    addIngredient(data) {
         return http.post("/addIngredient", data);
     }
 
-    searchRecipes() {
+    searchRecipes(searchTerm) {
         return http.get(`/searchRecipes?searchTerm=${searchTerm}`);
     }
 
-    searchIngredients() {
+    searchIngredients(searchTerm) {
         return http.get(`/searchIngredients?searchTerm=${searchTerm}`);
     }
+
 }
 
 export default new CookbookDataService();
