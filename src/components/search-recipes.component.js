@@ -9,11 +9,8 @@ export default class SearchRecipes extends Component {
     
     this.state = {
       id: null,
-      name: "",
-      directions: "",
-      ingredients: [],
+      recipes: [],
       searchTerm: "",
-      published: false,
       submitted: false
     };
   }
@@ -28,12 +25,8 @@ export default class SearchRecipes extends Component {
     CookbookDataService.searchRecipes(this.state.searchTerm)
       .then(response => {
         this.setState({
-          id: response.data.id,
-          name: response.data.name,
-          directions: response.data.directions,
-          ingredients: response.data.ingredients,
-          published: response.data.published,
-          submitted: true
+            recipes: response.data,
+            submitted: true  
         });
         console.log(response.data);
       })
@@ -43,12 +36,25 @@ export default class SearchRecipes extends Component {
   }
 
   render() {
-    const { searchTerm } = this.state;
+    const { searchTerm, recipes } = this.state;
     return (
       <div className="submit-form">
         {this.state.submitted ? (
           <div>
-            <h4>Found Recipe</h4>
+            <h4>Found Recipe(s)</h4>
+            <ul className="list-group">
+                {recipes &&
+                recipes.map((recipe, index) => (
+                    <li
+                        className="list-group-item "
+                        key={index}
+                    >
+                        <h6>{recipe.name}</h6>
+                        <p>Directions: {recipe.directions}</p>
+                        <p>Ingredients: {recipe.ingredients}</p>
+                    </li>
+                ))}
+            </ul>
           </div>
         ) : (
             <div className="col-md-8">
