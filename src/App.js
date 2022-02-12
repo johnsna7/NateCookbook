@@ -9,17 +9,12 @@ class App extends Component {
     return (
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <a href="/tutorials" className="navbar-brand">
-            bezKoder
+          <a href="/" className="navbar-brand">
+            Nate Cookbook
           </a>
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
-              <Link to={"/tutorials"} className="nav-link">
-                Tutorials
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to={"/add"} className="nav-link">
+              <Link to={"/addRecipe"} className="nav-link">
                 Add
               </Link>
             </li>
@@ -27,7 +22,7 @@ class App extends Component {
         </nav>
         <div className="container mt-3">
           <Switch>
-            <Route exact path="/add" component={AddRecipe} />
+            <Route exact path="/addRecipe" component={AddRecipe} />
           </Switch>
         </div>
       </div>
