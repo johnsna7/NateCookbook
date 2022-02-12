@@ -11,7 +11,11 @@ class CookbookDataService {
     }
 
     getAllRecipes() {
-        return http.get("/searchRecipes?searchTerm=")
+        return http.get("/searchRecipes?searchTerm=");
+    }
+
+    getAllIngredients() {
+        return http.get("/searchIngredients?searchTerm=");
     }
 
     createRecipe(data) {

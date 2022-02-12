@@ -4,6 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import AddRecipe from "./components/add-recipe.component";
 import RecipeList from "./components/recipe-list.component";
+//import AddIngredient from  "./components/add-ingredient.component"
+import IngredientList from "./components/ingredient-list.component"
 
 class App extends Component {
   render() {
@@ -24,12 +26,18 @@ class App extends Component {
                 Create Recipe
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to={"/ingredients"} className="nav-link">
+                Ingredients
+              </Link>
+            </li>
           </div>
         </nav>
         <div className="container mt-3">
           <Switch>
             <Route exact path={["/", "/recipes"]} component={RecipeList} />
             <Route exact path="/addRecipe" component={AddRecipe} />
+            <Route exact path="/ingredients" component={IngredientList} />
           </Switch>
         </div>
       </div>
