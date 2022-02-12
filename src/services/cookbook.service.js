@@ -9,7 +9,11 @@ class CookbookDataService {
     clearDatabase() {
         return http.delete("/clearDatabase");
     }
-    
+
+    getAllRecipes() {
+        return http.get("/searchRecipes?searchTerm=")
+    }
+
     createRecipe(data) {
         return http.post("/createRecipe", data);
     }

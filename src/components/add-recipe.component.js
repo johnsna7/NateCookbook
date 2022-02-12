@@ -67,7 +67,7 @@ export default class AddRecipe extends Component {
           <div>
             <h4>You submitted successfully!</h4>
             <button className="btn btn-success" onClick={this.newRecipe}>
-              Add
+              Add Another Recipe
             </button>
           </div>
         ) : (
