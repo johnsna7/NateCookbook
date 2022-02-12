@@ -9,6 +9,7 @@ class CookbookDataService {
     clearDatabase() {
         return http.delete("/clearDatabase");
     }
+    
     createRecipe(data) {
         return http.post("/createRecipe", data);
     }
