@@ -142,6 +142,14 @@ export default class SearchRecipes extends Component {
                   ))}
                 </ul>
               </div>
+              <Link
+                to={"/recipes/" + currentRecipe.id}
+                className="badge badge-warning"
+              >
+                <button className="btn btn-success">
+                    Add Ingredient to Recipe
+                </button>
+              </Link>
             </div>
           ) : (
             <div>
