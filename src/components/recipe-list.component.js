@@ -176,7 +176,7 @@ export default class SearchRecipes extends Component {
                 to={"/recipes/" + currentRecipe.id}
                 className="badge badge-warning"
               >
-                <button className="btn btn-success">
+                <button className="btn btn-primary">
                   Add Ingredient to Recipe
                 </button>
               </Link>

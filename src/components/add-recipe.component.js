@@ -86,7 +86,7 @@ export default class AddRecipe extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="directions">Directions</label>
-              <input
+              <textarea
                 type="text"
                 className="form-control"
                 id="directions"
@@ -94,7 +94,8 @@ export default class AddRecipe extends Component {
                 value={this.state.directions}
                 onChange={this.onChangeDirections}
                 name="directions"
-              />
+                rows="4"
+              ></textarea>
             </div>
             <button onClick={this.saveRecipe} className="btn btn-success">
               Create Recipe

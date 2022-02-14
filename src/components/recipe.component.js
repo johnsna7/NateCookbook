@@ -7,6 +7,7 @@ export default class Recipe extends Component {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
     this.addIngredientToRecipe = this.addIngredientToRecipe.bind(this);
+    this.newIngredient = this.newIngredient.bind(this);
 
     this.state = {
       recipeId: this.props.match.params.id,
@@ -40,15 +41,27 @@ export default class Recipe extends Component {
       });
   }
 
+  newIngredient() {
+    this.setState({
+      ingredientName: "",
+      submitted: false,
+    });
+  }
+
   render() {
     return (
       <div className="submit-form">
         {this.state.submitted ? (
           <div>
             <h4>You submitted successfully!</h4>
-            <Link to={"/recipes/"} className="badge badge-warning">
-              <button className="btn btn-success">Go Back to Recipes</button>
-            </Link>
+            <div className="button-box col-lg-12">
+              <Link to={"/recipes/"} className="badge badge-warning">
+                <button className="btn btn-success">Go Back to Recipes</button>
+              </Link>
+              <button className="btn btn-success" onClick={this.newIngredient}>
+                Add Another Ingredient
+              </button>
+            </div>
           </div>
         ) : (
           <div>
