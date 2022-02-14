@@ -5,8 +5,8 @@ import "./App.css";
 
 import AddRecipe from "./components/add-recipe.component";
 import RecipeList from "./components/recipe-list.component";
-import Recipe from  "./components/recipe.component"
-import IngredientList from "./components/ingredient-list.component"
+import Recipe from "./components/recipe.component";
+import IngredientList from "./components/ingredient-list.component";
 
 class App extends Component {
   render() {

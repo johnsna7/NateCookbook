@@ -8,46 +8,46 @@ export default class AddRecipe extends Component {
     this.onChangeDirections = this.onChangeDirections.bind(this);
     this.saveRecipe = this.saveRecipe.bind(this);
     this.newRecipe = this.newRecipe.bind(this);
-    
+
     this.state = {
       id: null,
       name: "",
-      directions: "", 
+      directions: "",
       published: false,
-      submitted: false
+      submitted: false,
     };
   }
 
   onChangeName(e) {
     this.setState({
-      name: e.target.value
+      name: e.target.value,
     });
   }
 
   onChangeDirections(e) {
     this.setState({
-      directions: e.target.value
+      directions: e.target.value,
     });
   }
 
   saveRecipe() {
     var data = {
       name: this.state.name,
-      directions: this.state.directions
+      directions: this.state.directions,
     };
 
     CookbookDataService.createRecipe(data)
-      .then(response => {
+      .then((response) => {
         this.setState({
           id: response.data.id,
           name: response.data.name,
           directions: response.data.directions,
           published: response.data.published,
-          submitted: true
+          submitted: true,
         });
         console.log(response.data);
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
       });
   }
@@ -57,7 +57,7 @@ export default class AddRecipe extends Component {
       name: "",
       directions: "",
       published: false,
-      submitted: false
+      submitted: false,
     });
   }
   render() {

@@ -11,14 +11,13 @@ export default class SearchRecipes extends Component {
     this.retrieveRecipes = this.retrieveRecipes.bind(this);
     this.refreshList = this.refreshList.bind(this);
     this.setActiveRecipe = this.setActiveRecipe.bind(this);
-    this.searchByTerm = this.searchByTerm.bind(this);    
-    //this.filterRecipes = this.filterRecipes.bind(this);
+    this.searchByTerm = this.searchByTerm.bind(this);
     this.state = {
       recipes: [],
       currentRecipe: null,
       currentIndex: -1,
       searchTerm: "",
-      filterTerm: ""
+      filterTerm: "",
     };
   }
 
@@ -29,126 +28,123 @@ export default class SearchRecipes extends Component {
   onChangeSearchTerm(e) {
     const searchTerm = e.target.value;
     this.setState({
-      searchTerm: searchTerm
+      searchTerm: searchTerm,
     });
   }
 
   onChangeFilterTerm(e) {
-    const termToFilter= e.target.value;
+    const termToFilter = e.target.value;
     this.setState({
-      filterTerm: termToFilter
+      filterTerm: termToFilter,
     });
   }
 
   retrieveRecipes() {
-    cookbookService.getAllRecipes()
-      .then(response => {
+    cookbookService
+      .getAllRecipes()
+      .then((response) => {
         this.setState({
-          recipes: response.data
+          recipes: response.data,
         });
         console.log(response.data);
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
-    });
+      });
   }
 
   refreshList() {
     this.retrieveRecipes();
     this.setState({
       currentRecipe: null,
-      currentIndex: -1
+      currentIndex: -1,
     });
   }
 
   setActiveRecipe(recipe, index) {
     this.setState({
       currentRecipe: recipe,
-      currentIndex: index
+      currentIndex: index,
     });
   }
 
   searchByTerm() {
     CookbookDataService.searchRecipes(this.state.searchTerm)
-      .then(response => {
+      .then((response) => {
         this.setState({
-            recipes: response.data,
+          recipes: response.data,
         });
         console.log(response.data);
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
       });
   }
 
-  /*
-  filterRecipes(e) {
-    const filteredRecipes = e.filter( (recipe) => 
-      !recipe.ingredients.some( ing => 
-        ing.name.includes(this.filterTerm)));
-    this.setState({
-      recipes: filteredRecipes
-    }); 
-  }
-*/
-
   render() {
-    const { searchTerm, recipes, currentRecipe, currentIndex, filterTerm } = this.state;
+    const { searchTerm, recipes, currentRecipe, currentIndex, filterTerm } =
+      this.state;
     return (
       <div className="list row">
         <div className="col-md-8">
-            <div className="input-group mb-3">
-                <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Search by Recipe Name"
-                    value={searchTerm}
-                    onChange={this.onChangeSearchTerm}
-                    />
-                    <div className="input-group-append">
-                        <button
-                            className="btn btn-outline-secondary"
-                            type="button"
-                            onClick={this.searchByTerm}
-                        >
-                        Search Recipes
-                    </button>
-                </div>
+          <div className="input-group mb-3">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search by Recipe Name"
+              value={searchTerm}
+              onChange={this.onChangeSearchTerm}
+            />
+            <div className="input-group-append">
+              <button
+                className="btn btn-outline-secondary"
+                type="button"
+                onClick={this.searchByTerm}
+              >
+                Search Recipes
+              </button>
             </div>
+          </div>
         </div>
         <div className="col-md-8">
           <h6>Filter Out Recipes Containing:</h6>
-            <div className="input-group mb-3">
-                <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Filter out Ingredient"
-                    value={filterTerm}
-                    onChange={this.onChangeFilterTerm}
-                    />
-            </div>
+          <div className="input-group mb-3">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Filter out Ingredient"
+              value={filterTerm}
+              onChange={this.onChangeFilterTerm}
+            />
+          </div>
         </div>
         <div className="col-md-6">
-            <h4>Recipe List</h4>
-            <ul className="list-group">
-                {recipes &&
-                recipes
-                .filter(recipe => !filterTerm || !recipe.ingredients.some(ing => ing.name.includes(filterTerm)))
+          <h4>Recipe List</h4>
+          <ul className="list-group">
+            {recipes &&
+              recipes
+                .filter(
+                  (recipe) =>
+                    !filterTerm ||
+                    !recipe.ingredients.some((ing) =>
+                      ing.name.includes(filterTerm)
+                    )
+                )
                 .map((recipe, index) => (
-                    <li
-                        className={
-                          "list-group-item " +
-                          (index === currentIndex ? "active" : "")
-                        }
-                        onClick={() => this.setActiveRecipe(recipe, index)}
-                        key={index}
-                    >
-                        {recipe.name}
-                    </li>
+                  <li
+                    className={
+                      "list-group-item " +
+                      (index === currentIndex ? "active" : "")
+                    }
+                    onClick={() => this.setActiveRecipe(recipe, index)}
+                    key={index}
+                  >
+                    {recipe.name}
+                  </li>
                 ))}
-            </ul>
-          </div>
-          <div className="col-md-6">
+          </ul>
+        </div>
+        <div className="col-md-6">
           {currentRecipe ? (
             <div>
               <h4>Recipe</h4>
@@ -170,8 +166,8 @@ export default class SearchRecipes extends Component {
                 </label>{" "}
                 <ul className="list-group-flush">
                   {currentRecipe.ingredients.map((ingredient, index) => (
-                    <li className="list-group-item" 
-                      key={index}>{ingredient.name}
+                    <li className="list-group-item" key={index}>
+                      {ingredient.name}
                     </li>
                   ))}
                 </ul>
@@ -181,7 +177,7 @@ export default class SearchRecipes extends Component {
                 className="badge badge-warning"
               >
                 <button className="btn btn-success">
-                    Add Ingredient to Recipe
+                  Add Ingredient to Recipe
                 </button>
               </Link>
             </div>
