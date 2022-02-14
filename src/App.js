@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+
 import AddRecipe from "./components/add-recipe.component";
 import RecipeList from "./components/recipe-list.component";
 import Recipe from  "./components/recipe.component"
@@ -12,11 +13,11 @@ class App extends Component {
     return (
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <a href="/recipes" className="navbar-brand">
+          <Link to={"/recipes"} className="navbar-brand">
             Nate Cookbook
-          </a>
+          </Link>
           <div className="navbar-nav mr-auto">
-          <li className="nav-item">
+            <li className="nav-item">
               <Link to={"/recipes"} className="nav-link">
                 Recipes
               </Link>
@@ -33,6 +34,7 @@ class App extends Component {
             </li>
           </div>
         </nav>
+
         <div className="container mt-3">
           <Switch>
             <Route exact path={["/", "/recipes"]} component={RecipeList} />
@@ -45,4 +47,5 @@ class App extends Component {
     );
   }
 }
+
 export default App;

@@ -7,16 +7,18 @@ export default class SearchRecipes extends Component {
   constructor(props) {
     super(props);
     this.onChangeSearchTerm = this.onChangeSearchTerm.bind(this);
+    this.onChangeFilterTerm = this.onChangeFilterTerm.bind(this);
     this.retrieveRecipes = this.retrieveRecipes.bind(this);
     this.refreshList = this.refreshList.bind(this);
     this.setActiveRecipe = this.setActiveRecipe.bind(this);
     this.searchByTerm = this.searchByTerm.bind(this);    
+    //this.filterRecipes = this.filterRecipes.bind(this);
     this.state = {
       recipes: [],
       currentRecipe: null,
       currentIndex: -1,
       searchTerm: "",
-      //submitted: false
+      filterTerm: ""
     };
   }
 
@@ -28,6 +30,13 @@ export default class SearchRecipes extends Component {
     const searchTerm = e.target.value;
     this.setState({
       searchTerm: searchTerm
+    });
+  }
+
+  onChangeFilterTerm(e) {
+    const termToFilter= e.target.value;
+    this.setState({
+      filterTerm: termToFilter
     });
   }
 
@@ -72,8 +81,19 @@ export default class SearchRecipes extends Component {
       });
   }
 
+  /*
+  filterRecipes(e) {
+    const filteredRecipes = e.filter( (recipe) => 
+      !recipe.ingredients.some( ing => 
+        ing.name.includes(this.filterTerm)));
+    this.setState({
+      recipes: filteredRecipes
+    }); 
+  }
+*/
+
   render() {
-    const { searchTerm, recipes, currentRecipe, currentIndex } = this.state;
+    const { searchTerm, recipes, currentRecipe, currentIndex, filterTerm } = this.state;
     return (
       <div className="list row">
         <div className="col-md-8">
@@ -96,11 +116,25 @@ export default class SearchRecipes extends Component {
                 </div>
             </div>
         </div>
+        <div className="col-md-8">
+          <h6>Filter Out Recipes Containing:</h6>
+            <div className="input-group mb-3">
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Filter out Ingredient"
+                    value={filterTerm}
+                    onChange={this.onChangeFilterTerm}
+                    />
+            </div>
+        </div>
         <div className="col-md-6">
             <h4>Recipe List</h4>
             <ul className="list-group">
                 {recipes &&
-                recipes.map((recipe, index) => (
+                recipes
+                .filter(recipe => !filterTerm || !recipe.ingredients.some(ing => ing.name.includes(filterTerm)))
+                .map((recipe, index) => (
                     <li
                         className={
                           "list-group-item " +
